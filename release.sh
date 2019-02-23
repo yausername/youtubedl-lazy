@@ -69,7 +69,8 @@ if ! python3 -c 'import rsa' 2>/dev/null; then echo 'ERROR: python3-rsa is missi
 if ! python3 -c 'import wheel' 2>/dev/null; then echo 'ERROR: wheel is missing'; exit 1; fi
 
 cd ..
-git commit $gpg_sign_commits -am "release $version"
+git add -A
+git diff-index --quiet HEAD || git commit $gpg_sign_commits -m "release $version"
 MASTER=$(git rev-parse --abbrev-ref HEAD)
 git push origin $MASTER:master
 cd youtube-dl
