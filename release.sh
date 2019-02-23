@@ -114,7 +114,9 @@ make youtube-dl youtube-dl.tar.gz
 #read -p "VM running? (y/n) " -n 1
 #wget "http://$buildserver/build/rg3/youtube-dl/youtube-dl.exe?rev=$REV" -O youtube-dl.exe
 mkdir -p "build/$version"
+sed '1d' youtube-dl > youtube_dl.zip
 mv youtube-dl "build/$version"
+mv youtube_dl.zip "build/$version"
 mv youtube-dl.tar.gz "build/$version/youtube-dl-$version.tar.gz"
 RELEASE_FILES="youtube-dl youtube-dl-$version.tar.gz"
 (cd build/$version/ && md5sum $RELEASE_FILES > MD5SUMS)
