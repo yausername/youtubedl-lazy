@@ -68,6 +68,12 @@ if ! type pandoc >/dev/null 2>/dev/null; then echo 'ERROR: pandoc is missing'; e
 if ! python3 -c 'import rsa' 2>/dev/null; then echo 'ERROR: python3-rsa is missing'; exit 1; fi
 if ! python3 -c 'import wheel' 2>/dev/null; then echo 'ERROR: wheel is missing'; exit 1; fi
 
+cd ..
+git commit $gpg_sign_commits -am "release $version"
+MASTER=$(git rev-parse --abbrev-ref HEAD)
+git push origin $MASTER:master
+cd youtube-dl
+
 #read -p "Is ChangeLog up to date? (y/n) " -n 1
 #if [[ ! $REPLY =~ ^[Yy]$ ]]; then exit 1; fi
 
@@ -88,7 +94,7 @@ fi
 #/bin/echo -e "\n### Committing documentation, templates and youtube_dl/version.py..."
 #make README.md CONTRIBUTING.md .github/ISSUE_TEMPLATE.md supportedsites
 #git add README.md CONTRIBUTING.md .github/ISSUE_TEMPLATE.md docs/supportedsites.md youtube_dl/version.py ChangeLog
-#git commit $gpg_sign_commits -m "release $version"
+#git commit $gpg_sign_commits -am "release $version"
 
 #/bin/echo -e "\n### Now tagging, signing and pushing..."
 #git tag -s -m "Release $version" "$version"
