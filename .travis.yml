@@ -1,3 +1,4 @@
+language: generic
 before_install:
   - echo -e "machine github.com\n  login ytdl-lazy-machine-user\n  password $CI_USER_PASSWORD" > ~/.netrc
 deploy:
