@@ -1,5 +1,6 @@
 language: generic
 before_install:
+  - pip3 install rsa
   - sudo apt-get install pandoc
   - echo -e "machine github.com\n  login ytdl-lazy-machine-user\n  password $CI_USER_PASSWORD" > ~/.netrc
 deploy:
