@@ -3,6 +3,7 @@ before_install:
   - sudo apt-get install python3
   - sudo apt-get install python3-pip
   - pip3 install --user rsa
+  - pip3 install --user wheel
   - sudo apt-get install pandoc
   - echo -e "machine github.com\n  login ytdl-lazy-machine-user\n  password $CI_USER_PASSWORD" > ~/.netrc
   - chmod 600 ~/.netrc
