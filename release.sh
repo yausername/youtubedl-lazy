@@ -73,11 +73,14 @@ git add -A
 git diff-index --quiet HEAD || git commit $gpg_sign_commits -m "release $version"
 MASTER=$(git rev-parse --abbrev-ref HEAD)
 git push origin $MASTER:master
-cd youtube-dl
+
+/bin/echo -e "\n### patching in ffmpeg for youtubedl-android support"
+cp ffmpeg.py youtube-dl/youtube_dl/postprocessor/
 
 #read -p "Is ChangeLog up to date? (y/n) " -n 1
 #if [[ ! $REPLY =~ ^[Yy]$ ]]; then exit 1; fi
 
+cd youtube-dl
 /bin/echo -e "\n### First of all, testing..."
 make clean
 if $skip_tests ; then
