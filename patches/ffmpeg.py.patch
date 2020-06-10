@@ -1,0 +1,52 @@
+--- youtube-dl/youtube_dl/postprocessor/ffmpeg.py	2020-06-11 02:13:26.088230841 +0530
++++ youtube-dl/youtube_dl/postprocessor/ffmpeg.py	2020-06-11 02:10:47.668225639 +0530
+@@ -73,7 +73,7 @@
+         return FFmpegPostProcessor(downloader)._versions
+ 
+     def _determine_executables(self):
+-        programs = ['avprobe', 'avconv', 'ffmpeg', 'ffprobe']
++        programs = ['avprobe', 'avconv', 'ffmpeg', 'ffprobe', 'libffmpeg.bin.so', 'libffprobe.bin.so']
+         prefer_ffmpeg = True
+ 
+         def get_ffmpeg_version(path):
+@@ -115,7 +115,7 @@
+                         self._versions = {}
+                         return None
+                     location = os.path.dirname(os.path.abspath(location))
+-                    if basename in ('ffmpeg', 'ffprobe'):
++                    if basename in ('ffmpeg', 'ffprobe', 'libffmpeg.bin.so', 'libffprobe.bin.so'):
+                         prefer_ffmpeg = True
+ 
+                 self._paths = dict(
+@@ -128,18 +128,18 @@
+             self._paths = dict((p, p) for p in programs)
+ 
+         if prefer_ffmpeg is False:
+-            prefs = ('avconv', 'ffmpeg')
++            prefs = ('avconv', 'ffmpeg', 'libffmpeg.bin.so')
+         else:
+-            prefs = ('ffmpeg', 'avconv')
++            prefs = ('libffmpeg.bin.so', 'ffmpeg', 'avconv')
+         for p in prefs:
+             if self._versions[p]:
+                 self.basename = p
+                 break
+ 
+         if prefer_ffmpeg is False:
+-            prefs = ('avprobe', 'ffprobe')
++            prefs = ('avprobe', 'ffprobe', 'libffprobe.bin.so')
+         else:
+-            prefs = ('ffprobe', 'avprobe')
++            prefs = ('libffprobe.bin.so', 'ffprobe', 'avprobe')
+         for p in prefs:
+             if self._versions[p]:
+                 self.probe_basename = p
+@@ -219,7 +219,7 @@
+             ])
+         cmd = [encodeFilename(self.executable, True), encodeArgument('-y')]
+         # avconv does not have repeat option
+-        if self.basename == 'ffmpeg':
++        if self.basename == 'ffmpeg' or self.basename == 'libffmpeg.bin.so':
+             cmd += [encodeArgument('-loglevel'), encodeArgument('repeat+info')]
+         cmd += (files_cmd
+                 + [encodeArgument(o) for o in opts]

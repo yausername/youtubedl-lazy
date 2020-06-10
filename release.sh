@@ -75,7 +75,7 @@ MASTER=$(git rev-parse --abbrev-ref HEAD)
 git push origin $MASTER:master
 
 /bin/echo -e "\n### patching in ffmpeg for youtubedl-android support"
-cp ffmpeg.py youtube-dl/youtube_dl/postprocessor/
+patch -p0 < patches/ffmpeg.py.patch
 
 #read -p "Is ChangeLog up to date? (y/n) " -n 1
 #if [[ ! $REPLY =~ ^[Yy]$ ]]; then exit 1; fi
