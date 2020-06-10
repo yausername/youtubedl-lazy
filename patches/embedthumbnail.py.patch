@@ -1,0 +1,23 @@
+diff --git a/youtube-dl/youtube_dl/postprocessor/embedthumbnail.py b/youtube-dl/youtube_dl/postprocessor/embedthumbnail.py
+index 56be914b8..31c663771 100644
+--- a/youtube-dl/youtube_dl/postprocessor/embedthumbnail.py
++++ b/youtube-dl/youtube_dl/postprocessor/embedthumbnail.py
+@@ -56,10 +56,16 @@ class EmbedThumbnailPP(FFmpegPostProcessor):
+             os.rename(encodeFilename(temp_filename), encodeFilename(filename))
+ 
+         elif info['ext'] in ['m4a', 'mp4']:
+-            if not check_executable('AtomicParsley', ['-v']):
++            atomicparsley = None
++            atomicparsleys = ['libatomicparsley.bin.so', 'AtomicParsley']
++            for e in atomoicparsleys:
++                if check_executable(e, ['-v']):
++                    atomicparsley = e
++                    break
++            if not atomicparsley:
+                 raise EmbedThumbnailPPError('AtomicParsley was not found. Please install.')
+ 
+-            cmd = [encodeFilename('AtomicParsley', True),
++            cmd = [encodeFilename(atomicparsley, True),
+                    encodeFilename(filename, True),
+                    encodeArgument('--artwork'),
+                    encodeFilename(thumbnail_filename, True),

@@ -74,8 +74,9 @@ git diff-index --quiet HEAD || git commit $gpg_sign_commits -m "release $version
 MASTER=$(git rev-parse --abbrev-ref HEAD)
 git push origin $MASTER:master
 
-/bin/echo -e "\n### patching in ffmpeg for youtubedl-android support"
-patch -p0 < patches/ffmpeg.py.patch
+/bin/echo -e "\n### patching in files for youtubedl-android support"
+patch -p1 < patches/ffmpeg.py.patch
+patch -p1 < patches/embedthumbnail.py.patch
 
 #read -p "Is ChangeLog up to date? (y/n) " -n 1
 #if [[ ! $REPLY =~ ^[Yy]$ ]]; then exit 1; fi

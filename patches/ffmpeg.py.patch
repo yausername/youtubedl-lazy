@@ -1,6 +1,8 @@
---- youtube-dl/youtube_dl/postprocessor/ffmpeg.py	2020-06-11 02:13:26.088230841 +0530
-+++ youtube-dl/youtube_dl/postprocessor/ffmpeg.py	2020-06-11 02:10:47.668225639 +0530
-@@ -73,7 +73,7 @@
+diff --git a/youtube-dl/youtube_dl/postprocessor/ffmpeg.py b/youtube-dl/youtube_dl/postprocessor/ffmpeg.py
+index 5f7298345..b1f113131 100644
+--- a/youtube-dl/youtube_dl/postprocessor/ffmpeg.py
++++ b/youtube-dl/youtube_dl/postprocessor/ffmpeg.py
+@@ -73,7 +73,7 @@ class FFmpegPostProcessor(PostProcessor):
          return FFmpegPostProcessor(downloader)._versions
  
      def _determine_executables(self):
@@ -9,7 +11,7 @@
          prefer_ffmpeg = True
  
          def get_ffmpeg_version(path):
-@@ -115,7 +115,7 @@
+@@ -115,7 +115,7 @@ class FFmpegPostProcessor(PostProcessor):
                          self._versions = {}
                          return None
                      location = os.path.dirname(os.path.abspath(location))
@@ -18,7 +20,7 @@
                          prefer_ffmpeg = True
  
                  self._paths = dict(
-@@ -128,18 +128,18 @@
+@@ -128,18 +128,18 @@ class FFmpegPostProcessor(PostProcessor):
              self._paths = dict((p, p) for p in programs)
  
          if prefer_ffmpeg is False:
@@ -41,7 +43,7 @@
          for p in prefs:
              if self._versions[p]:
                  self.probe_basename = p
-@@ -219,7 +219,7 @@
+@@ -219,7 +219,7 @@ class FFmpegPostProcessor(PostProcessor):
              ])
          cmd = [encodeFilename(self.executable, True), encodeArgument('-y')]
          # avconv does not have repeat option
