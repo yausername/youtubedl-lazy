@@ -2,6 +2,7 @@ language: generic
 before_install:
   - sudo apt-get install python3
   - sudo apt-get install python3-pip
+  - sudo apt-get install python3-setuptools  
   - pip3 install --user rsa
   - pip3 install --user wheel
   - sudo apt-get install pandoc
