@@ -25,8 +25,8 @@ from youtube_dl.utils import (
 
 
 class GitHubReleaser(object):
-    _API_URL = 'https://api.github.com/repos/yausername/youtubedl-lazy/releases'
-    _UPLOADS_URL = 'https://uploads.github.com/repos/yausername/youtubedl-lazy/releases/%s/assets?name=%s'
+    _API_URL = 'https://api.github.com/repos/xibr/youtubedl-lazy/releases'
+    _UPLOADS_URL = 'https://uploads.github.com/repos/xibr/youtubedl-lazy/releases/%s/assets?name=%s'
     _NETRC_MACHINE = 'github.com'
 
     def __init__(self, debuglevel=0):
