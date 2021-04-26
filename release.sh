@@ -113,7 +113,7 @@ fi
 
 /bin/echo -e "\n### OK, now it is time to build the binaries..."
 REV=$(git rev-parse HEAD)
-#make lazy-extractors
+make lazy-extractors
 make youtube-dl youtube-dl.tar.gz
 #read -p "VM running? (y/n) " -n 1
 #wget "http://$buildserver/build/rg3/youtube-dl/youtube-dl.exe?rev=$REV" -O youtube-dl.exe
